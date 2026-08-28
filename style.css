@@ -1,0 +1,122 @@
+:root{
+    accent-color: #8672ff;
+    base-color: white
+    text-color: #2e2b41; 
+    input-color:#f3f0ff;
+    
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-family: poppins, segoe  ui, sans-serif;
+    font-size: 12pt;
+    color: var(--text-color);
+    text-align: center;
+}
+body{
+    min-height: 100vh;
+    background-image: url(pexels-codioful-7135028.jpg);
+    background-size: cover;
+    background-position: right;
+    overflow: hidden;
+}
+.wrapper{
+    box-sizing: border-box;
+    background-color: var(--base-color);
+    height: 100vh;
+    width:max(40%, 600px)
+    padding: 10px;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+
+}
+
+h1{
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+
+}
+form{
+    width: min(400px, 100%);
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+form > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+form label{
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
+    background-color: blueviolet;
+    fill: #8672ff;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+
+}
+form input{
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 1em;
+    font: inherit;
+    border-radius: 0 10px 0;
+    border: none;
+    background-color: rgb(208, 166, 247);
+
+}
+form button{
+    margin-top: 10px;
+    border: none;
+    border-radius: 1000px;
+    padding: .85em 4em;
+    background-color: blueviolet;
+    font: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 150ms ease;
+}
+form botton:hover{
+    background-color: #0d0c13;
+}
+a{
+    text-decoration: none;
+    color: #8672ff;
+}
+img{
+    height: 50px;
+    width: 100px;
+    margin-top: 20px;
+}
+@media(max-width: 1100px){
+    .wrapper{
+        width: min(600px,100%);
+    border-radius: 0;
+    }
+}
+p  h1{
+    color: #8672ff;
+    background-color: #8672ff;
+}
+
+
+
