@@ -21,7 +21,7 @@ body{
     background-size: cover;
     background-position: right;
     overflow: hidden;
-    width:100%;
+    width: 100%;
     max-width: 430px;
     margin: 0 auto;
 }
@@ -120,6 +120,10 @@ p  h1{
     color: #8672ff;
     background-color: #8672ff;
 }
-
+img{
+    height: 100px;
+    width: 300px;
+    
+}
 
 
