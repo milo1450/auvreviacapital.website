@@ -21,6 +21,9 @@ body{
     background-size: cover;
     background-position: right;
     overflow: hidden;
+    width:100%;
+    max-width: 430px;
+    margin: 0 auto;
 }
 .wrapper{
     box-sizing: border-box;
