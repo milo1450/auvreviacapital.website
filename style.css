@@ -12,23 +12,17 @@
 html{
   font-family: Poppins, Segoe UI, sans-serif;
   font-size: 12pt;
-  color: var(--text-color);
+  color:var(--text-color) ;
   text-align: center;
 }
 body{
   min-height: 100vh;
-  background-image: url(background.jpg);
+  background-image: url(pexels-codioful-7135028.jpg)  ;
   background-size: cover;
-  background-position: right;
-  overflow: hidden;
+  
 }
 .wrapper{
-  box-sizing: border-box;
-  background-color: var(--base-color);
-  height: 100vh;
-  width: max(40%, 600px);
-  padding: 10px;
-  border-radius: 0 20px 20px 0;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,4 +128,14 @@ form div.incorrect input{
 }
 #error-message{
   color:#f06272;
+}
+img {
+  height: 80px;
+  width: 200px;
+}
+strong {
+  color: rgb(15, 15, 15);
+}
+p {
+  color: rgb(112, 112, 116);
 }
