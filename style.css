@@ -19,6 +19,8 @@ body{
   min-height: 100vh;
   background-image: url(pexels-codioful-7135028.jpg)  ;
   background-size: cover;
+  padding-top: 20%;
+
   
 }
 .wrapper{
