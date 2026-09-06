@@ -19,7 +19,7 @@ body{
   min-height: 100vh;
   background-image: url(pexels-codioful-7135028.jpg)  ;
   background-size: cover;
-  padding-top: 20%;
+  padding-top: 40%;
 
   
 }
@@ -140,4 +140,5 @@ strong {
 }
 p {
   color: rgb(112, 112, 116);
+  
 }
