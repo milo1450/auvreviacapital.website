@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Wallet</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4f46e5;
+    }
+
+    .profile {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #4f46e5;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Balance Card */
+    .balance-card {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
+    }
+
+    .balance-label {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 10px;
+    }
+
+    .balance {
+      font-size: 38px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .balance-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    /* Buttons */
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .action-btn {
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      background: #f0efff;
+    }
+
+    /* Transactions */
+    .transactions {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .transactions h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .transaction {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .transaction:last-child {
+      border-bottom: none;
+    }
+
+    .transaction-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .transaction-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .green {
+      background: #dcfce7;
+    }
+
+    .red {
+      background: #fee2e2;
+    }
+
+    .transaction-name {
+      font-weight: bold;
+    }
+
+    .transaction-date {
+      font-size: 12px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .amount {
+      font-weight: bold;
+    }
+
+    .income {
+      color: #16a34a;
+    }
+
+    .expense {
+      color: #dc2626;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
+      .balance {
+        font-size: 30px;
+      }
+
+      .balance-info {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="logo">MyWallet</div>
+      <div class="profile">JD</div>
+    </header>
+
+    <!-- Balance -->
+    <div class="balance-card">
+      <div class="balance-label">Available Balance</div>
+
+      <div class="balance">$5,240.50</div>
+
+      <div class="balance-info">
+        <span>**** **** **** 4582</span>
+        <span>09/28</span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="action-btn" onclick="sendMoney()">
+         <h1>MY ADDRESS</h1>
+      </button>
+
+
+    
+
+    <p>Send crypto to this wallet address:</p>
+
+    <div class="wallet-address">
+      <span id="walletAddress">
+        0x71C123456789ABCDEF123456789ABCDEF92Ab
+      </span>
+
+      <button onclick="copyWallet()"> Copy</button>
+    </div>
+
+    <div class="warning">
+      ⚠️ Only send the supported asset to this address.
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-content {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 18px;
+    position: relative;
+  }
+
+  .modal-content h2 {
+    margin-bottom: 10px;
+  }
+
+  .modal-content p {
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .close {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    border: none;
+    background: none;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .wallet-address {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: #f3f4f6;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .wallet-address span {
+    word-break: break-all;
+    font-size: 13px;
+    flex: 1;
+  }
+
+  .wallet-address button {
+    border: none;
+    background: #4f46e5;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .warning {
+    margin-top: 18px;
+    padding: 12px;
+    background: #fff7ed;
+    color: #9a3412;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+</style>
+
+<script>
+  function addMoney() {
+    document.getElementById("walletModal").style.display = "flex";
+  }
+
+  function closeWallet() {
+    document.getElementById("walletModal").style.display = "none";
+  }
+
+  function copyWallet() {
+    const address = document.getElementById("walletAddress").innerText;
+
+    navigator.clipboard.writeText(address);
+
+    alert("Wallet address copied!");
+  }
+</script>
+
+        
+      </button>
+
+      <button class="action-btn" onclick="withdraw()">
+        🏦 Withdraw
+      </button>
+    </div>
+
+    <!-- Transactions -->
+    <div class="transactions">
+      <h2>Recent Transactions</h2>
+
+      <div class="transaction">
+        <div class="transaction-left">
+          <div class="transaction-icon green">↓</div>
+
+          <div>
+            <div class="transaction-name">Salary</div>
+            <div class="transaction-date">September 5, 2026</div>
+          </div>
+        </div>
+
+        <div class="amount income">+$3,500.00</div>
+      </div>
+
+      <div class="transaction">
+        <div class="transaction-left">
+          <div class="transaction-icon red">↑</div>
+
+          <div>
+            <div class="transaction-name">Netflix</div>
+            <div class="transaction-date">September 3, 2026</div>
+          </div>
+        </div>
+
+        <div class="amount expense">-$15.99</div>
+      </div>
+
+      <div class="transaction">
+        <div class="transaction-left">
+          <div class="transaction-icon red">↑</div>
+
+          <div>
+            <div class="transaction-name">Shopping</div>
+            <div class="transaction-date">September 1, 2026</div>
+          </div>
+        </div>
+
+        <div class="amount expense">-$120.50</div>
+      </div>
+
+      <div class="transaction">
+        <div class="transaction-left">
+          <div class="transaction-icon green">↓</div>
+
+          <div>
+            <div class="transaction-name">Bank Transfer</div>
+            <div class="transaction-date">August 29, 2026</div>
+          </div>
+        </div>
+
+        <div class="amount income">+$750.00</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function sendMoney() {
+      alert("Send Money clicked!");
+    }
+
+    function addMoney() {
+      alert("Add Money clicked!");
+    }
+
+    function withdraw() {
+      alert("Withdraw clicked!");
+    }
+  </script>
+
+</body>
+</html>
+
