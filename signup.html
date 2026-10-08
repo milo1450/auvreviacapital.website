@@ -1,77 +1,101 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Signup</title>
+
   <link rel="stylesheet" href="style.css">
-  <script type="text/javascript" src="validation.js" defer></script>
+
+  <script type="module" src="validation.js" defer></script>
+
 </head>
+
 <body>
+
   <div class="wrapper">
-    <h1>Signup</h1>
+
+```
+<h1>Signup</h1>
+
 <img src="ChatGPT Image Aug 27, 2026, 12_19_35 AM.png">
 
-    <p id="error-message"></p>
-    <form id="form">
-      <div>
-        <label for="firstname-input">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"/></svg>
-        </label>
-        <input type="text" name="firstname" id="firstname-input" placeholder="Firstname">
-      </div>
-      <div>
-        <label for="email-input">
-          <span>@</span>
-        </label>
-        <input type="email" name="email" id="email-input" placeholder="Email">
-      </div>
-      <div>
-        <label for="password-input">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
-        </label>
-        <input type="password" name="password" id="password-input" placeholder="Password">
-      </div>
-      <div>
-        <label for="repeat-password-input">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
-        </label>
-        <input type="password" name="repeat-password" id="repeat-password-input" placeholder="Repeat Password">
-      </div>
-      <button type="submit">Signup</button>
-    </form>
-    <p>Already have an Account? <a href="login.html">login</a> </p>
-    <strong>AUVREVIA CAPITAL</strong><BR>
-     <p> <i> ABOUT us </i> </p>
-      <p>AUVREVIA manages $2.33 trillion in assets incuding $1.92trillion in 
-      third-party client assetes as of 30 june 2026. assets incide $77.4 billion in real estate 
-      measured by net assete value ( which exclude uncalled CAPITAL)
-      as of 31st march 2026 (gross assete value eqivelent of $90.1 billion)
-      managed by prime real estate, an affiliate and wholly-owned subsidaiary
-      of AUVREVIA 50+YEARS experience helping investors navigate even the thoughest market
-      . 2.33tn under management entrusted to us by our client</p>
+<p id="error-message"></p>
+
+<form id="form">
+
+  <div>
+    <label for="firstname-input">First Name</label>
+    <input
+      type="text"
+      name="firstname"
+      id="firstname-input"
+      placeholder="Firstname"
+      required
+    >
   </div>
-  
-  // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAPCjVtvp7QiXqPVJDF6Ynw8kq6SMEUcHQ",
-  authDomain: "investment-5c3f8.firebaseapp.com",
-  projectId: "investment-5c3f8",
-  storageBucket: "investment-5c3f8.firebasestorage.app",
-  messagingSenderId: "420795229421",
-  appId: "1:420795229421:web:904b481b1a896307da58e4",
-  measurementId: "G-E3FB79ZK4Y"
-};
+  <div>
+    <label for="email-input">Email</label>
+    <input
+      type="email"
+      name="email"
+      id="email-input"
+      placeholder="Email"
+      required
+    >
+  </div>
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+  <div>
+    <label for="password-input">Password</label>
+    <input
+      type="password"
+      name="password"
+      id="password-input"
+      placeholder="Password"
+      required
+    >
+  </div>
+
+  <div>
+    <label for="repeat-password-input">Repeat Password</label>
+    <input
+      type="password"
+      name="repeat-password"
+      id="repeat-password-input"
+      placeholder="Repeat Password"
+      required
+    >
+  </div>
+
+  <button type="submit">Signup</button>
+
+</form>
+
+<p>
+  Already have an Account?
+  <a href="login.html">Login</a>
+</p>
+
+<strong>AUVREVIA CAPITAL</strong>
+
+<br>
+
+<p><i>ABOUT US</i></p>
+
+<p>
+  AUVREVIA manages $2.33 trillion in assets including
+  $1.92 trillion in third-party client assets as of 30 June 2026.
+  Assets include $77.4 billion in real estate measured by net asset
+  value (which excludes uncalled capital) as of 31 March 2026.
+  50+ years experience helping investors navigate even the toughest
+  markets. 2.33tn under management entrusted to us by our clients.
+</p>
+```
+
+  </div>
+
 </body>
 </html>
