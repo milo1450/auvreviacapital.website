@@ -9,15 +9,14 @@ import {
 
 // FIREBASE CONFIG
 const firebaseConfig = {
-    apiKey: "AIzaSyAPcJtvp7QiXqPVJDF6Ynw8kq6SMEUcHQ",
-    authDomain: "investment-5c3f8.firebaseapp.com",
-    projectId: "investment-5c3f8",
-    storageBucket: "investment-5c3f8.firebasestorage.app",
-    messagingSenderId: "420795229421",
-    appId: "1:420795229421:web:904b481b1a896307da58e4",
-    measurementId: "G-E3FB79ZK4Y"
+  apiKey: "AIzaSyAPCjVtvp7QiXqPVJDF6Ynw8kq6SMEUcHQ" ,
+  authDomain: "investment-5c3f8.firebaseapp.com",
+  projectId: "investment-5c3f8",
+  storageBucket: "investment-5c3f8.firebasestorage.app",
+  messagingSenderId: "420795229421",
+  appId: "1:420795229421:web:904b481b1a896307da58e4",
+  measurementId: "G-E3FB79ZK4Y"
 };
-
 
 // START FIREBASE
 const app = initializeApp(firebaseConfig);
