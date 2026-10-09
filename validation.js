@@ -77,8 +77,10 @@ form.addEventListener("submit", async (e) => {
             window.location.href = "login.html";
 
         } catch (error) {
+console.error("Signup error:", error);
+alert("Signup failed: " + error.code + " - " + error.message);
+}
 
-            console.error(error);
 
             if (error.code === "auth/email-already-in-use") {
                 error_message.innerText = "This email is already registered.";
