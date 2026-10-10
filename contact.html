@@ -1,418 +1,623 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Wallet</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f6fc">
+    <title>Aurevia Capital | My Wallet</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+    <style>
+        :root {
+            --purple: #7655e8;
+            --purple-dark: #5035b7;
+            --purple-light: #eee9ff;
+            --background: #f7f6fc;
+            --text: #25213b;
+            --muted: #89869d;
+            --border: #eeecf5;
+            --white: #ffffff;
+        }
 
-    body {
-      background: #f4f6f8;
-      color: #222;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 30px 20px;
-    }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
 
-    /* Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
+        button {
+            font: inherit;
+            cursor: pointer;
+        }
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #4f46e5;
-    }
+        .container {
+            width: min(1050px, 100%);
+            margin: auto;
+            padding: 28px 22px 40px;
+        }
 
-    .profile {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #4f46e5;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 38px;
+        }
 
-    /* Balance Card */
-    .balance-card {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: white;
-      padding: 30px;
-      border-radius: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
-    }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .balance-label {
-      font-size: 14px;
-      opacity: 0.8;
-      margin-bottom: 10px;
-    }
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #927bff, #5035b7);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-    .balance {
-      font-size: 38px;
-      font-weight: bold;
-      margin-bottom: 25px;
-    }
+        .brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
 
-    .balance-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-    }
+        .brand-subtitle {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 4px;
+        }
 
-    /* Buttons */
-    .actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 30px;
-    }
+        .avatar {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--purple-light);
+            color: var(--purple-dark);
+            font-weight: bold;
+        }
 
-    .action-btn {
-      border: none;
-      padding: 16px;
-      border-radius: 12px;
-      background: white;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      transition: 0.2s;
-    }
+        .page-heading {
+            margin-bottom: 24px;
+        }
 
-    .action-btn:hover {
-      transform: translateY(-2px);
-      background: #f0efff;
-    }
+        .page-heading h1 {
+            font-size: clamp(27px, 4vw, 34px);
+            letter-spacing: -1px;
+            margin-bottom: 9px;
+        }
 
-    /* Transactions */
-    .transactions {
-      background: white;
-      padding: 25px;
-      border-radius: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
+        .page-heading p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
 
-    .transactions h2 {
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
+        .balance-card {
+            position: relative;
+            overflow: hidden;
+            padding: 32px;
+            border-radius: 22px;
+            color: white;
+            background: linear-gradient(
+                120deg, #5035b7, #7655e8 65%, #9477f8
+            );
+            box-shadow: 0 15px 35px rgba(93, 65, 193, 0.18);
+            margin-bottom: 30px;
+        }
 
-    .transaction {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 0;
-      border-bottom: 1px solid #eee;
-    }
+        .balance-card::after {
+            content: "";
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            right: -70px;
+            top: -130px;
+            border: 1px solid rgba(255,255,255,0.17);
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 28px rgba(255,255,255,0.035),
+                0 0 0 58px rgba(255,255,255,0.025);
+            pointer-events: none;
+        }
 
-    .transaction:last-child {
-      border-bottom: none;
-    }
+        .balance-content {
+            position: relative;
+            z-index: 1;
+        }
 
-    .transaction-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        .balance-label {
+            color: rgba(255,255,255,0.85);
+            font-size: 14px;
+            margin-bottom: 13px;
+        }
 
-    .transaction-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-    }
+        .balance {
+            font-size: clamp(30px, 5vw, 43px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            overflow-wrap: anywhere;
+        }
 
-    .green {
-      background: #dcfce7;
-    }
+        .balance-note {
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            margin-top: 12px;
+            line-height: 1.6;
+        }
 
-    .red {
-      background: #fee2e2;
-    }
+        .balance-footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
 
-    .transaction-name {
-      font-weight: bold;
-    }
+        .balance-footer span {
+            display: block;
+            color: rgba(255,255,255,0.75);
+            font-size: 11px;
+            margin-bottom: 7px;
+        }
 
-    .transaction-date {
-      font-size: 12px;
-      color: #888;
-      margin-top: 4px;
-    }
+        .balance-footer strong {
+            font-size: 13px;
+        }
 
-    .amount {
-      font-weight: bold;
-    }
+        .section-title {
+            font-size: 19px;
+            margin-bottom: 17px;
+        }
 
-    .income {
-      color: #16a34a;
-    }
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
 
-    .expense {
-      color: #dc2626;
-    }
+        .action-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+            padding: 20px 16px;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            background: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-    /* Mobile */
-    @media (max-width: 600px) {
-      .actions {
-        grid-template-columns: 1fr;
-      }
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(50, 38, 100, 0.08);
+        }
 
-      .balance {
-        font-size: 30px;
-      }
+        .action-icon {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            background: var(--purple-light);
+            color: var(--purple-dark);
+            font-size: 22px;
+        }
 
-      .balance-info {
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
-  </style>
+        .action-card strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .action-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .wallet-card,
+        .transactions {
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 19px;
+            background: white;
+            margin-bottom: 25px;
+        }
+
+        .card-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .card-heading h2 {
+            font-size: 18px;
+        }
+
+        .wallet-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 17px;
+        }
+
+        .address-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: #faf9ff;
+            border: 1px solid #e7e2f8;
+            border-radius: 12px;
+        }
+
+        .address-text {
+            flex: 1;
+            min-width: 0;
+            color: #48415f;
+            font-size: 13px;
+            overflow-wrap: anywhere;
+            line-height: 1.7;
+        }
+
+        .copy-button {
+            flex-shrink: 0;
+            padding: 11px 15px;
+            border: none;
+            border-radius: 9px;
+            background: var(--purple);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .copy-button:hover,
+        .dialog-close:hover {
+            background: var(--purple-dark);
+        }
+
+        .notice {
+            margin-top: 16px;
+            padding: 14px;
+            border-radius: 11px;
+            background: #f5f2ff;
+            color: #59458f;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .empty-state {
+            padding: 30px 15px;
+            text-align: center;
+            background: #faf9ff;
+            border: 1px dashed #ddd5f5;
+            border-radius: 13px;
+        }
+
+        .empty-icon {
+            font-size: 29px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 12px 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .dialog-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(28, 21, 55, 0.55);
+        }
+
+        .dialog-backdrop.open {
+            display: flex;
+        }
+
+        .dialog {
+            width: 100%;
+            max-width: 390px;
+            padding: 28px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .dialog h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .dialog p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .dialog-close {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: var(--purple);
+            color: white;
+            font-weight: bold;
+        }
+
+        @media (max-width: 650px) {
+            .container {
+                padding: 20px 15px 28px;
+            }
+
+            .header {
+                margin-bottom: 28px;
+            }
+
+            .brand-name {
+                font-size: 17px;
+            }
+
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .balance-card {
+                padding: 25px 21px;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+                gap: 11px;
+            }
+
+            .action-card {
+                padding: 15px;
+            }
+
+            .wallet-card,
+            .transactions {
+                padding: 19px 15px;
+            }
+
+            .address-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .copy-button {
+                width: 100%;
+                padding: 13px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding-right: 11px;
+                padding-left: 11px;
+            }
+
+            .balance-card {
+                padding: 22px 16px;
+            }
+
+            .balance {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <main class="container">
 
-  <div class="container">
+        <header class="header">
+            <div class="brand">
+                <div class="brand-icon">A</div>
+                <div>
+                    <div class="brand-name">Aurevia Capital</div>
+                    <div class="brand-subtitle">Your financial overview</div>
+                </div>
+            </div>
 
-    <!-- Header -->
-    <header>
-      <div class="logo">MyWallet</div>
-      <div class="profile">JD</div>
-    </header>
+            <div class="avatar" aria-label="Aurevia Capital account">AC</div>
+        </header>
 
-    <!-- Balance -->
-    <div class="balance-card">
-      <div class="balance-label">Available Balance</div>
+        <section class="page-heading">
+            <h1>My Wallet</h1>
+            <p>Manage your wallet and view your account activity.</p>
+        </section>
 
-      <div class="balance">$100,240.000.50</div>
+        <section class="balance-card">
+            <div class="balance-content">
+                <div class="balance-label">Available Balance</div>
+                <div class="balance" id="walletBalance">$0.00</div>
 
-      <div class="balance-info">
-        <span>**** **** **** 4582</span>
-        <span>09/28</span>
-      </div>
-    </div>
+                <p class="balance-note">
+                    Your displayed balance is currently zero.
+                </p>
 
-    <!-- Actions -->
-    <div class="actions">
-      <button class="action-btn" onclick="sendMoney()">
-         <h1>MY ADDRESS</h1>
-      </button>
+                <div class="balance-footer">
+                    <div>
+                        <span>Account</span>
+                        <strong>Aurevia Capital</strong>
+                    </div>
 
+                    <div>
+                        <span>Wallet status</span>
+                        <strong>Pending setup</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    
+        <section>
+            <h2 class="section-title">Quick Actions</h2>
 
-    <p>Send crypto to this wallet address:</p>
+            <div class="actions">
+                <button class="action-card" type="button"
+                    onclick="showMessage('Send Funds', 'Sending is unavailable until a verified wallet and transfer service are connected.')">
+                    <div class="action-icon">↗</div>
+                    <div>
+                        <strong>Send Funds</strong>
+                        <p>Send funds from your wallet</p>
+                    </div>
+                </button>
 
-    <div class="wallet-address">
-      <span id="walletAddress">
-        0x71C123456789ABCDEF123456789ABCDEF92Ab
-      </span>
+                <button class="action-card" type="button"
+                    onclick="showMessage('Add Funds', 'Deposits are unavailable until a verified wallet and payment service are connected.')">
+                    <div class="action-icon">＋</div>
+                    <div>
+                        <strong>Add Funds</strong>
+                        <p>Add funds to your wallet</p>
+                    </div>
+                </button>
 
-      <button onclick="copyWallet()"> Copy</button>
-    </div>
+                <button class="action-card" type="button"
+                    onclick="showMessage('Withdraw Funds', 'Withdrawals are unavailable until a verified wallet and transfer service are connected.')">
+                    <div class="action-icon">⇧</div>
+                    <div>
+                        <strong>Withdraw</strong>
+                        <p>Withdraw from your wallet</p>
+                    </div>
+                </button>
+            </div>
+        </section>
 
-    <div class="warning">
-      ⚠️ Only send the supported asset to this address.
-    </div>
+        <section class="wallet-card">
+            <div class="card-heading">
+                <h2>My Wallet Address</h2>
+            </div>
 
-  </div>
-</div>
+            <p class="wallet-description">
+                Your wallet address will appear here after a valid address
+                has been added and verified.
+            </p>
 
-<style>
-  .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
+            <div class="address-box">
+                <span class="address-text" id="walletAddress">
+                    Wallet address pending setup
+                </span>
 
-  .modal-content {
-    background: white;
-    width: 100%;
-    max-width: 500px;
-    padding: 30px;
-    border-radius: 18px;
-    position: relative;
-  }
+                <button class="copy-button" type="button"
+                    onclick="copyWallet()">
+                    Copy Address
+                </button>
+            </div>
 
-  .modal-content h2 {
-    margin-bottom: 10px;
-  }
+            <div class="notice">
+                A verified wallet address and the correct network are
+                required before cryptocurrency can be received.
+            </div>
+        </section>
 
-  .modal-content p {
-    color: #666;
-    margin-bottom: 15px;
-  }
+        <section class="transactions">
+            <div class="card-heading">
+                <h2>Recent Activity</h2>
+            </div>
 
-  .close {
-    position: absolute;
-    right: 18px;
-    top: 15px;
-    border: none;
-    background: none;
-    font-size: 28px;
-    cursor: pointer;
-  }
+            <div class="empty-state">
+                <div class="empty-icon">↻</div>
+                <h3>No transactions yet</h3>
+                <p>
+                    Your transaction history will appear here when
+                    account activity is available.
+                </p>
+            </div>
+        </section>
 
-  .wallet-address {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    background: #f3f4f6;
-    padding: 12px;
-    border-radius: 10px;
-  }
+        <footer class="footer">
+            <p>&copy; 2026 Aurevia Capital</p>
+            <p>My Wallet</p>
+        </footer>
+    </main>
 
-  .wallet-address span {
-    word-break: break-all;
-    font-size: 13px;
-    flex: 1;
-  }
+    <div class="dialog-backdrop" id="messageDialog"
+        role="dialog" aria-modal="true" aria-labelledby="dialogTitle"
+        onclick="closeDialog(event)">
 
-  .wallet-address button {
-    border: none;
-    background: #4f46e5;
-    color: white;
-    padding: 10px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  .warning {
-    margin-top: 18px;
-    padding: 12px;
-    background: #fff7ed;
-    color: #9a3412;
-    border-radius: 10px;
-    font-size: 13px;
-  }
-</style>
-
-<script>
-  function addMoney() {
-    document.getElementById("walletModal").style.display = "flex";
-  }
-
-  function closeWallet() {
-    document.getElementById("walletModal").style.display = "none";
-  }
-
-  function copyWallet() {
-    const address = document.getElementById("walletAddress").innerText;
-
-    navigator.clipboard.writeText(address);
-
-    alert("Wallet address copied!");
-  }
-</script>
-
-        
-      </button>
-
-      <button class="action-btn" onclick="withdraw()">
-        🏦 Withdraw
-      </button>
-    </div>
-
-    <!-- Transactions -->
-    <div class="transactions">
-      <h2>Recent Transactions</h2>
-
-      <div class="transaction">
-        <div class="transaction-left">
-          <div class="transaction-icon green">↓</div>
-
-          <div>
-            <div class="transaction-name">Btc</div>
-            <div class="transaction-date">September 5, 2026</div>
-          </div>
+        <div class="dialog">
+            <h2 id="dialogTitle">Information</h2>
+            <p id="dialogMessage"></p>
+            <button class="dialog-close" type="button"
+                onclick="closeDialog()">
+                Close
+            </button>
         </div>
-
-        <div class="amount income">+$3,500.00</div>
-      </div>
-
-      <div class="transaction">
-        <div class="transaction-left">
-          <div class="transaction-icon red">↑</div>
-
-          <div>
-            <div class="transaction-name">Btc sent</div>
-            <div class="transaction-date">September 3, 2026</div>
-          </div>
-        </div>
-
-        <div class="amount expense">-$15.99</div>
-      </div>
-
-      <div class="transaction">
-        <div class="transaction-left">
-          <div class="transaction-icon red">↑</div>
-
-          <div>
-            <div class="transaction-name">bank transfer</div>
-            <div class="transaction-date">September 1, 2026</div>
-          </div>
-        </div>
-
-        <div class="amount expense">-$120.50</div>
-      </div>
-
-      <div class="transaction">
-        <div class="transaction-left">
-          <div class="transaction-icon green">↓</div>
-
-          <div>
-            <div class="transaction-name">Bank Transfer</div>
-            <div class="transaction-date">August 29, 2026</div>
-          </div>
-        </div>
-
-        <div class="amount income">+$750.00</div>
-      </div>
-
     </div>
 
-  </div>
+    <script>
+        function showMessage(title, message) {
+            document.getElementById("dialogTitle").textContent = title;
+            document.getElementById("dialogMessage").textContent = message;
+            document.getElementById("messageDialog").classList.add("open");
+        }
 
-  <script>
-    function sendMoney() {
-      alert("Send Money clicked!");
-    }
+        function closeDialog(event) {
+            const backdrop = document.getElementById("messageDialog");
 
-    function addMoney() {
-      alert("Add Money clicked!");
-    }
+            if (event && event.target !== backdrop) {
+                return;
+            }
 
-    function withdraw() {
-      alert("Withdraw clicked!");
-    }
-  </script>
+            backdrop.classList.remove("open");
+        }
 
+        function copyWallet() {
+            showMessage(
+                "Wallet Address Pending",
+                "A verified wallet address has not been added yet, so there is no address to copy."
+            );
+        }
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                document.getElementById("messageDialog").classList.remove("open");
+            }
+        });
+    </script>
 </body>
 </html>
-
+```

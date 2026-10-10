@@ -1,101 +1,211 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Signup</title>
-
+  <meta name="theme-color" content="#f8f7fc">
+  <title>Create Your Account | Aurevia Capital</title>
   <link rel="stylesheet" href="style.css">
-
-  <script type="module" src="validation.js" defer></script>
-
+  <script type="module" src="validation.js"></script>
 </head>
-
 <body>
+  <div class="page">
 
-  <div class="wrapper">
+    <header class="topbar">
+      <a class="brand" href="signup.html" aria-label="Aurevia Capital home">
+        <span class="brand-mark">A</span>
+        <span class="brand-copy">
+          <span class="brand-name">Aurevia Capital</span>
+          <span class="brand-caption">Capital. Clarity. Confidence.</span>
+        </span>
+      </a>
 
-```
-<h1>Signup</h1>
+      <div class="top-login">
+        Already registered? <a href="login.html">Log in</a>
+      </div>
+    </header>
 
-<img src="ChatGPT Image Aug 27, 2026, 12_19_35 AM.png">
+    <main class="main-layout">
 
-<p id="error-message"></p>
+      <section class="intro-panel">
+        <div class="intro-content">
+          <span class="eyebrow">Welcome to Aurevia</span>
 
-<form id="form">
+          <h1>
+            Your financial<br>
+            journey starts<br>
+            <span>with a plan.</span>
+          </h1>
 
-  <div>
-    <label for="firstname-input">First Name</label>
-    <input
-      type="text"
-      name="firstname"
-      id="firstname-input"
-      placeholder="Firstname"
-      required
-    >
+          <p class="intro-text">
+            Create your account to access your personal dashboard,
+            manage your profile, and explore the services available
+            through Aurevia Capital.
+          </p>
+
+          <img
+            class="brand-image"
+            src="ChatGPT Image Aug 27, 2026, 12_19_35 AM.png"
+            alt="Aurevia Capital"
+            onerror="this.style.display='none'">
+        </div>
+
+        <div class="intro-bottom">
+
+          <div class="company-stats">
+            <div class="stat-item">
+              <h3>$2.33T</h3>
+              <p>Assets under management*</p>
+            </div>
+
+            <div class="stat-item">
+              <h3>50+ Years</h3>
+              <p>Experience helping investors navigate challenging markets</p>
+            </div>
+          </div>
+
+          <p class="asset-disclosure">
+            Aurevia manages $2.33 trillion in assets, including
+            $1.92 trillion in third-party client assets as of
+            30 June 2026. Assets include $77.4 billion in real estate,
+            measured by net asset value (excluding uncalled capital),
+            as of 31 March 2026, equivalent to a gross asset value
+            of $90.1 billion, managed by Prime Real Estate, an affiliate
+            and wholly owned subsidiary of Aurevia.
+          </p>
+
+          <p class="intro-tagline">
+            A clear, organised space for your financial account.<br>
+            Take your next step with confidence.
+          </p>
+
+        </div>
+      </section>
+
+      <section class="signup-panel">
+        <div class="form-heading">
+          <span class="form-kicker">GET STARTED</span>
+          <h2>Create your account</h2>
+          <p>
+            Enter your details below to get started.
+            Please use an email address you can access.
+          </p>
+        </div>
+
+        <p id="error-message" role="alert" aria-live="polite"></p>
+
+        <form id="form">
+          <div class="field">
+            <label for="firstname-input">First name</label>
+            <input
+              type="text"
+              name="firstname"
+              id="firstname-input"
+              placeholder="Enter your first name"
+              autocomplete="given-name"
+              required>
+          </div>
+
+          <div class="field">
+            <label for="email-input">Email address</label>
+            <input
+              type="email"
+              name="email"
+              id="email-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required>
+          </div>
+
+          <div class="field">
+            <label for="password-input">Password</label>
+
+            <div class="password-wrap">
+              <input
+                type="password"
+                name="password"
+                id="password-input"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                required>
+
+              <button
+                class="toggle-password"
+                type="button"
+                data-target="password-input"
+                aria-label="Show password"
+                aria-pressed="false">Show</button>
+            </div>
+
+            <p class="password-hint">
+              Choose a strong password you have not used elsewhere.
+            </p>
+          </div>
+
+          <div class="field">
+            <label for="repeat-password-input">Confirm password</label>
+
+            <div class="password-wrap">
+              <input
+                type="password"
+                name="repeat-password"
+                id="repeat-password-input"
+                placeholder="Enter your password again"
+                autocomplete="new-password"
+                required>
+
+              <button
+                class="toggle-password"
+                type="button"
+                data-target="repeat-password-input"
+                aria-label="Show confirmation password"
+                aria-pressed="false">Show</button>
+            </div>
+          </div>
+
+          <button class="signup-button" type="submit">
+            Create my account <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <p class="login-link">
+          Already have an account?
+          <a href="login.html">Log in here</a>
+        </p>
+
+        <div class="form-footnote">
+          Keep your login details private.<br>
+          Never share your password with anyone.
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      &copy; 2026 Aurevia Capital. All rights reserved.
+    </footer>
+
   </div>
 
-  <div>
-    <label for="email-input">Email</label>
-    <input
-      type="email"
-      name="email"
-      id="email-input"
-      placeholder="Email"
-      required
-    >
-  </div>
+  <script>
+    document.querySelectorAll(".toggle-password").forEach(function(button) {
+      button.addEventListener("click", function() {
+        const input = document.getElementById(
+          button.getAttribute("data-target")
+        );
 
-  <div>
-    <label for="password-input">Password</label>
-    <input
-      type="password"
-      name="password"
-      id="password-input"
-      placeholder="Password"
-      required
-    >
-  </div>
+        const shouldShow = input.type === "password";
 
-  <div>
-    <label for="repeat-password-input">Repeat Password</label>
-    <input
-      type="password"
-      name="repeat-password"
-      id="repeat-password-input"
-      placeholder="Repeat Password"
-      required
-    >
-  </div>
-
-  <button type="submit">Signup</button>
-
-</form>
-
-<p>
-  Already have an Account?
-  <a href="login.html">Login</a>
-</p>
-
-<strong>AUVREVIA CAPITAL</strong>
-
-<br>
-
-<p><i>ABOUT US</i></p>
-
-<p>
-  AUVREVIA manages $2.33 trillion in assets including
-  $1.92 trillion in third-party client assets as of 30 June 2026.
-  Assets include $77.4 billion in real estate measured by net asset
-  value (which excludes uncalled capital) as of 31 March 2026.
-  50+ years experience helping investors navigate even the toughest
-  markets. 2.33tn under management entrusted to us by our clients.
-</p>
-```
-
-  </div>
-
+        input.type = shouldShow ? "text" : "password";
+        button.textContent = shouldShow ? "Hide" : "Show";
+        button.setAttribute("aria-pressed", String(shouldShow));
+        button.setAttribute(
+          "aria-label",
+          shouldShow ? "Hide password" : "Show password"
+        );
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,33 +1,150 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <meta name="theme-color" content="#f8f7fc">
+  <title>Log In | Aurevia Capital</title>
   <link rel="stylesheet" href="style.css">
-  <script type="module" src="validation.js" defer></script>
+  <script type="module" src="validation.js"></script>
 </head>
 <body>
-  <div class="wrapper">
-    <h1>Login</h1>
-    <p id="error-message"></p>
-    <form id="form">
-      <div>
-     <label for="email-input">
-          <span>@</span>
-        </label>
-        <input type="email" name="email" id="email-input" placeholder="Email">
-      </div>
-      <div>
-        <label for="password-input">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
-        </label>
-        <input type="password" name="password" id="password-input" placeholder="Password">
-      </div>
-           <button type="submit">Login</button>
+  <div class="page">
 
-    </form>
-    <p>New here? <a href="signup.html">Create an Account</a></p>
+    <header class="topbar">
+      <a class="brand" href="signup.html" aria-label="Aurevia Capital home">
+        <span class="brand-mark">A</span>
+        <span class="brand-copy">
+          <span class="brand-name">Aurevia Capital</span>
+          <span class="brand-caption">Capital. Clarity. Confidence.</span>
+        </span>
+      </a>
+
+      <div class="top-login">
+        New to Aurevia? <a href="signup.html">Create an account</a>
+      </div>
+    </header>
+
+    <main class="main-layout">
+
+      <section class="intro-panel">
+        <div class="intro-content">
+          <span class="eyebrow">Welcome back</span>
+
+          <h1>
+            Your goals.<br>
+            Your future.<br>
+            <span>Your next step.</span>
+          </h1>
+
+          <p class="intro-text">
+            Log in to access your account, manage your profile,
+            and continue your journey with Aurevia Capital.
+          </p>
+
+          <img
+            class="brand-image"
+            src="ChatGPT Image Aug 27, 2026, 12_19_35 AM.png"
+            alt="Aurevia Capital"
+            onerror="this.style.display='none'">
+        </div>
+
+        <div class="intro-bottom">
+          <p class="intro-tagline">
+            Capital. Clarity. Confidence.<br>
+            Your account, all in one place.
+          </p>
+        </div>
+      </section>
+
+      <section class="signup-panel">
+        <div class="form-heading">
+          <span class="form-kicker">YOUR ACCOUNT</span>
+          <h2>Welcome back</h2>
+          <p>
+            Enter your email address and password
+            to log in to your account.
+          </p>
+        </div>
+
+        <p id="error-message" role="alert" aria-live="polite"></p>
+
+        <form id="form">
+          <div class="field">
+            <label for="email-input">Email address</label>
+            <input
+              type="email"
+              name="email"
+              id="email-input"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required>
+          </div>
+
+          <div class="field">
+            <label for="password-input">Password</label>
+
+            <div class="password-wrap">
+              <input
+                type="password"
+                name="password"
+                id="password-input"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required>
+
+              <button
+                class="toggle-password"
+                type="button"
+                data-target="password-input"
+                aria-label="Show password"
+                aria-pressed="false">Show</button>
+            </div>
+          </div>
+
+          <button class="signup-button" type="submit">
+            Log in to your account <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <p class="login-link">
+          Don't have an account?
+          <a href="signup.html">Create an account</a>
+        </p>
+
+        <div class="form-footnote">
+          Keep your login details private.<br>
+          Never share your password with anyone.
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      &copy; 2026 Aurevia Capital. All rights reserved.
+    </footer>
+
   </div>
+
+  <script>
+    document.querySelectorAll(".toggle-password").forEach(function(button) {
+      button.addEventListener("click", function() {
+        const input = document.getElementById(
+          button.getAttribute("data-target")
+        );
+
+        const shouldShow = input.type === "password";
+
+        input.type = shouldShow ? "text" : "password";
+        button.textContent = shouldShow ? "Hide" : "Show";
+        button.setAttribute("aria-pressed", String(shouldShow));
+        button.setAttribute(
+          "aria-label",
+          shouldShow ? "Hide password" : "Show password"
+        );
+      });
+    });
+  </script>
 </body>
 </html>
