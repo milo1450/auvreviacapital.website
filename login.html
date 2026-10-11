@@ -2,149 +2,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f8f7fc">
-  <title>Log In | Aurevia Capital</title>
-  <link rel="stylesheet" href="style.css">
-  <script type="module" src="validation.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Aurevia Capital</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Login page design only */
+
+        body.login-screen {
+            background: #171329;
+            color: #f7f4ff;
+        }
+
+        .login-screen .topbar {
+            background: #211b3b;
+            border: 1px solid #393052;
+            border-radius: 14px;
+            padding: 20px 26px;
+        }
+
+        .login-screen .brand-mark {
+            background: #a78bfa;
+            color: #171329;
+        }
+
+        .login-screen .brand-name {
+            color: #ffffff;
+        }
+
+        .login-screen .brand-caption,
+        .login-screen .top-login {
+            color: #d0c9e5;
+        }
+
+        .login-screen .brand-caption {
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        .login-screen .top-login a {
+            color: #c4b5fd;
+        }
+
+        .login-screen .intro-panel {
+            background: linear-gradient(145deg, #302353, #171329 80%);
+            color: #ffffff;
+            border: 1px solid #443465;
+            border-radius: 18px;
+        }
+
+        .login-screen .eyebrow {
+            color: #c4b5fd;
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .login-screen .intro-content h1 {
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .login-screen .intro-content h1 span {
+            color: #c4b5fd;
+        }
+
+        .login-screen .intro-text,
+        .login-screen .intro-tagline {
+            color: #ddd6f5;
+        }
+
+        .login-screen .signup-panel {
+            background: #ffffff;
+            color: #29243b;
+            border: 1px solid #e4def5;
+            border-radius: 18px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .login-screen .form-heading h2 {
+            color: #211b3b;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -0.8px;
+            margin-bottom: 10px;
+        }
+
+        .login-screen .form-heading p,
+        .login-screen .field label,
+        .login-screen .form-footnote {
+            color: #625a78;
+        }
+
+        .login-screen .field input {
+            background: #f7f5fc;
+            border: 1px solid #d9d1ec;
+            color: #29243b;
+        }
+
+        .login-screen .field input:focus {
+            outline: 2px solid #a78bfa;
+            border-color: #7054d9;
+        }
+
+        .login-screen .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .login-screen .password-wrapper input {
+            width: 100%;
+            padding-right: 72px;
+        }
+
+        .login-screen .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #5140a6;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        .login-screen .signup-button {
+            background: linear-gradient(90deg, #7054d9, #5140a6);
+            color: #ffffff;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .login-screen .signup-button:hover {
+            background: #42317f;
+        }
+
+        .login-screen .login-link a {
+            color: #7054d9;
+        }
+
+        .login-screen .footer {
+            color: #c0b8d6;
+        }
+
+        .login-screen #error-message {
+            color: #dc2626;
+        }
+
+        @media (max-width: 600px) {
+            .login-screen .topbar {
+                padding: 16px;
+            }
+
+            .login-screen .form-heading h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+
+    <script type="module" src="validation.js"></script>
 </head>
-<body>
-  <div class="page">
+
+<body class="login-screen">
 
     <header class="topbar">
-      <a class="brand" href="signup.html" aria-label="Aurevia Capital home">
-        <span class="brand-mark">A</span>
-        <span class="brand-copy">
-          <span class="brand-name">Aurevia Capital</span>
-          <span class="brand-caption">Capital. Clarity. Confidence.</span>
-        </span>
-      </a>
+        <div class="brand">
+            <div class="brand-mark">A</div>
 
-      <div class="top-login">
-        New to Aurevia? <a href="signup.html">Create an account</a>
-      </div>
+            <div class="brand-details">
+                <div class="brand-name">Aurevia Capital</div>
+                <div class="brand-caption">
+                    Capital Clarity Confidence
+                </div>
+            </div>
+        </div>
+
+        <div class="top-login">
+            Don't have an account?
+            <a href="signup.html">Create account</a>
+        </div>
     </header>
 
     <main class="main-layout">
 
-      <section class="intro-panel">
-        <div class="intro-content">
-          <span class="eyebrow">Welcome back</span>
+        <section class="intro-panel">
+            <div class="intro-content">
 
-          <h1>
-            Your goals.<br>
-            Your future.<br>
-            <span>Your next step.</span>
-          </h1>
+                <p class="eyebrow">WELCOME BACK</p>
 
-          <p class="intro-text">
-            Log in to access your account, manage your profile,
-            and continue your journey with Aurevia Capital.
-          </p>
+                <h1>
+                    Your goals.<br>
+                    <span>Your future. Your next step.</span>
+                </h1>
 
-          <img
-            class="brand-image"
-            src="ChatGPT Image Aug 27, 2026, 12_19_35 AM.png"
-            alt="Aurevia Capital"
-            onerror="this.style.display='none'">
-        </div>
+                <p class="intro-text">
+                    Sign in to access your Aurevia Capital account
+                    and view your personal investment dashboard.
+                </p>
 
-        <div class="intro-bottom">
-          <p class="intro-tagline">
-            Capital. Clarity. Confidence.<br>
-            Your account, all in one place.
-          </p>
-        </div>
-      </section>
+                <p class="intro-tagline">
+                    A clearer view of your financial journey.
+                </p>
 
-      <section class="signup-panel">
-        <div class="form-heading">
-          <span class="form-kicker">YOUR ACCOUNT</span>
-          <h2>Welcome back</h2>
-          <p>
-            Enter your email address and password
-            to log in to your account.
-          </p>
-        </div>
-
-        <p id="error-message" role="alert" aria-live="polite"></p>
-
-        <form id="form">
-          <div class="field">
-            <label for="email-input">Email address</label>
-            <input
-              type="email"
-              name="email"
-              id="email-input"
-              placeholder="you@example.com"
-              autocomplete="email"
-              required>
-          </div>
-
-          <div class="field">
-            <label for="password-input">Password</label>
-
-            <div class="password-wrap">
-              <input
-                type="password"
-                name="password"
-                id="password-input"
-                placeholder="Enter your password"
-                autocomplete="current-password"
-                required>
-
-              <button
-                class="toggle-password"
-                type="button"
-                data-target="password-input"
-                aria-label="Show password"
-                aria-pressed="false">Show</button>
             </div>
-          </div>
+        </section>
 
-          <button class="signup-button" type="submit">
-            Log in to your account <span aria-hidden="true">→</span>
-          </button>
-        </form>
+        <section class="signup-panel">
 
-        <p class="login-link">
-          Don't have an account?
-          <a href="signup.html">Create an account</a>
-        </p>
+            <div class="form-heading">
+                <h2>Welcome back</h2>
+                <p>Enter your details to sign in to your account.</p>
+            </div>
 
-        <div class="form-footnote">
-          Keep your login details private.<br>
-          Never share your password with anyone.
-        </div>
-      </section>
+            <p id="error-message" role="alert" aria-live="polite"></p>
+
+            <form id="form">
+
+                <div class="field">
+                    <label for="email-input">Email address</label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        id="email-input"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="password-input">Password</label>
+
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            name="password"
+                            id="password-input"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="toggle-password"
+                            aria-label="Show password"
+                        >
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="signup-button">
+                    Login
+                </button>
+
+            </form>
+
+            <p class="login-link">
+                Don't have an account?
+                <a href="signup.html">Sign up</a>
+            </p>
+
+            <p class="form-footnote">
+                Please use the email address and password associated
+                with your account.
+            </p>
+
+        </section>
 
     </main>
 
     <footer class="footer">
-      &copy; 2026 Aurevia Capital. All rights reserved.
+        &copy; 2026 Aurevia Capital. All rights reserved.
     </footer>
 
-  </div>
+    <script>
+        const passwordInput = document.getElementById("password-input");
+        const togglePassword = document.getElementById("toggle-password");
 
-  <script>
-    document.querySelectorAll(".toggle-password").forEach(function(button) {
-      button.addEventListener("click", function() {
-        const input = document.getElementById(
-          button.getAttribute("data-target")
-        );
+        togglePassword.addEventListener("click", function () {
+            const isPassword = passwordInput.type === "password";
 
-        const shouldShow = input.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+            togglePassword.textContent = isPassword ? "Hide" : "Show";
+            togglePassword.setAttribute(
+                "aria-label",
+                isPassword ? "Hide password" : "Show password"
+            );
+        });
+    </script>
 
-        input.type = shouldShow ? "text" : "password";
-        button.textContent = shouldShow ? "Hide" : "Show";
-        button.setAttribute("aria-pressed", String(shouldShow));
-        button.setAttribute(
-          "aria-label",
-          shouldShow ? "Hide password" : "Show password"
-        );
-      });
-    });
-  </script>
 </body>
 </html>
