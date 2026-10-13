@@ -1,843 +1,867 @@
 
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="theme-color" content="#f7f6fc">
+
     <title>Aurevia Capital | My Wallet</title>
 
+
+
     <style>
-        :root {
-            --purple: #7655e8;
-            --purple-dark: #5035b7;
-            --purple-light: #eee9ff;
-            --background: #f7f6fc;
-            --text: #25213b;
-            --muted: #89869d;
-            --border: #eeecf5;
-            --white: #ffffff;
-        }
+:root{
+  --purple:#7655e8;
+  --purple-dark:#5035b7;
+  --purple-light:#eee9ff;
+  --page:#f7f6fc;
+  --white:#ffffff;
+  --text:#25213b;
+  --muted:#89869d;
+  --border:#eeecf5;
+  --green:#247653;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--page);color:var(--text);min-height:100vh;line-height:1.5}
+button{font:inherit;cursor:pointer}
+.container{width:min(1080px,100%);margin:auto;padding:30px 22px 44px}
+.header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:38px}
+.brand{display:flex;align-items:center;gap:13px}
+.brand-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:10px;background:var(--purple-dark);color:#fff;font-size:22px;font-weight:700}
+.brand-name{font-size:19px;font-weight:700;letter-spacing:-.3px;color:var(--purple-dark)}
+.brand-subtitle{color:var(--muted);font-size:12px;margin-top:2px}
+.avatar{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:700;font-size:13px}
+.page-heading{margin-bottom:22px}
+.page-heading h1{font-size:clamp(26px,4vw,32px);letter-spacing:-.7px;color:var(--purple-dark);margin-bottom:6px}
+.page-heading p,.investment-intro{font-size:14px;color:var(--muted);line-height:1.7}
+.balance-card{padding:28px 30px;border-radius:14px;background:linear-gradient(135deg,var(--purple-dark),var(--purple));color:#fff;margin-bottom:34px}
+.balance-label{font-size:13px;color:#d7dce7;margin-bottom:9px}
+.balance{font-size:clamp(30px,5vw,40px);font-weight:700;letter-spacing:-.8px;overflow-wrap:anywhere}
+.balance-note{font-size:12px;color:#d7dce7;margin-top:8px}
+.balance-footer{display:flex;flex-wrap:wrap;gap:30px;border-top:1px solid rgba(255,255,255,.17);margin-top:24px;padding-top:17px}
+.balance-footer div{display:flex;flex-direction:column;gap:3px}
+.balance-footer span{font-size:11px;color:#d7dce7}
+.balance-footer strong{font-size:13px;font-weight:600}
+.section-title{font-size:20px;letter-spacing:-.3px;color:var(--purple-dark);margin-bottom:8px}
+.investment-section{margin-bottom:34px}
+.investment-intro{margin-bottom:18px}
+.investment-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.investment-plan{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:18px 19px;min-width:0}
+.investment-plan h3{font-size:15px;font-weight:700;color:var(--purple-dark);margin-bottom:7px}
+.investment-minimum{font-size:23px;font-weight:700;letter-spacing:-.4px;color:var(--purple);margin-bottom:13px}
+.investment-detail{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #eef0f4;font-size:12px}
+.investment-detail span{color:var(--muted)}
+.investment-detail strong{text-align:right;color:var(--text);font-weight:600}
+.investment-note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:14px;padding:12px 14px;background:#eef1f6;border-radius:8px}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 34px}
+.action-card{display:flex;align-items:center;gap:12px;text-align:left;padding:16px;background:#fff;border:1px solid var(--border);border-radius:11px;color:var(--text);transition:border-color .15s,transform .15s}
+.action-card:hover{border-color:#bcb2d8;transform:translateY(-1px)}
+.action-icon{flex:0 0 38px;width:38px;height:38px;display:grid;place-items:center;border-radius:9px;background:var(--purple-light);color:var(--purple);font-size:20px}
+.action-card strong{display:block;font-size:13px;color:var(--purple-dark);margin-bottom:3px}
+.action-card p{font-size:11px;color:var(--muted);line-height:1.5}
+.wallet-card,.transactions{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:18px}
+.card-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.card-heading h2{font-size:17px;color:var(--purple-dark)}
+.wallet-description{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.address-box{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;background:#f8f9fb;border:1px solid var(--border);border-radius:8px}
+.address-text{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.copy-button,.dialog-close{border:0;border-radius:7px;background:var(--purple);color:#fff;padding:10px 13px;font-size:12px;font-weight:600;white-space:nowrap}
+.notice{font-size:11px;color:#8a5b25;background:#fff8ec;border:1px solid #f0dfc3;border-radius:7px;padding:10px 12px;margin-top:13px;line-height:1.6}
+.transaction-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:15px 0;border-bottom:1px solid #edf0f4}
+.transaction-row:last-child{border-bottom:0}
+.transaction-details strong{font-size:13px;color:var(--purple-dark);text-transform:capitalize}
+.transaction-details p{font-size:12px;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}
+.transaction-amount{font-size:13px;white-space:nowrap;color:var(--purple-dark)}
+.empty-state{text-align:center;padding:28px 12px}
+.empty-state h3{font-size:14px;color:var(--purple-dark);margin-bottom:5px}
+.empty-state p{font-size:12px;color:var(--muted);line-height:1.7}
+.footer{text-align:center;padding:16px 0 0;color:var(--muted);font-size:11px}
+.dialog-backdrop{display:none;position:fixed;inset:0;z-index:10;align-items:center;justify-content:center;padding:20px;background:rgba(16,24,40,.48)}
+.dialog-backdrop.open{display:flex}
+.dialog{width:min(400px,100%);background:#fff;border-radius:13px;padding:24px;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.dialog h2{font-size:19px;color:var(--purple-dark);margin-bottom:10px}
+.dialog p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.dialog-address-box{display:grid;gap:12px;padding:12px;background:#f8f9fb;border:1px solid var(--border);border-radius:8px;margin:-5px 0 18px}
+.dialog-address-box[hidden]{display:none}
+.dialog-address-box span{font-size:12px;line-height:1.6;overflow-wrap:anywhere;color:var(--text)}
+.dialog-address-box .copy-button{width:100%}
+.plans-table-wrap{width:100%;overflow-x:auto;background:var(--white);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 18px rgba(80,53,183,.04)}
+.plans-table{width:100%;border-collapse:collapse;text-align:left;min-width:590px}
+.plans-table th{background:var(--purple-light);color:var(--purple-dark);font-size:12px;font-weight:700;letter-spacing:.2px;padding:15px 17px;border-bottom:1px solid var(--border)}
+.plans-table td{padding:15px 17px;font-size:13px;color:var(--text);border-bottom:1px solid var(--border)}
+.plans-table tbody tr:last-child td{border-bottom:0}
+.plans-table tbody tr:hover{background:#fbfaff}
+.plans-table td strong{color:var(--purple-dark);font-weight:700}
+@media(max-width:700px){.container{padding:22px 15px 32px}.header{margin-bottom:28px}.balance-card{padding:23px 20px}.investment-grid{grid-template-columns:1fr}.actions{grid-template-columns:1fr}.action-card{padding:13px 15px}.wallet-card,.transactions{padding:17px}.address-box{align-items:flex-start;flex-direction:column;width:100%}.copy-button{width:100%}.transaction-row{gap:10px}.transaction-amount{font-size:12px}}
+@media(min-width:900px){.investment-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--background);
-            color: var(--text);
-            min-height: 100vh;
-        }
-
-        button {
-            font: inherit;
-            cursor: pointer;
-        }
-
-        .container {
-            width: min(1050px, 100%);
-            margin: auto;
-            padding: 28px 22px 40px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 38px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .brand-icon {
-            width: 45px;
-            height: 45px;
-            display: grid;
-            place-items: center;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #927bff, #5035b7);
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .brand-name {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-subtitle {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: 4px;
-        }
-
-        .avatar {
-            width: 43px;
-            height: 43px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            background: var(--purple-light);
-            color: var(--purple-dark);
-            font-weight: bold;
-        }
-
-        .page-heading {
-            margin-bottom: 24px;
-        }
-
-        .page-heading h1 {
-            font-size: clamp(27px, 4vw, 34px);
-            letter-spacing: -1px;
-            margin-bottom: 9px;
-        }
-
-        .page-heading p {
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        .balance-card {
-            position: relative;
-            overflow: hidden;
-            padding: 32px;
-            border-radius: 22px;
-            color: white;
-            background: linear-gradient(
-                120deg, #5035b7, #7655e8 65%, #9477f8
-            );
-            box-shadow: 0 15px 35px rgba(93, 65, 193, 0.18);
-            margin-bottom: 30px;
-        }
-
-        .balance-card::after {
-            content: "";
-            position: absolute;
-            width: 240px;
-            height: 240px;
-            right: -70px;
-            top: -130px;
-            border: 1px solid rgba(255,255,255,0.17);
-            border-radius: 50%;
-            box-shadow:
-                0 0 0 28px rgba(255,255,255,0.035),
-                0 0 0 58px rgba(255,255,255,0.025);
-            pointer-events: none;
-        }
-
-        .balance-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .balance-label {
-            color: rgba(255,255,255,0.85);
-            font-size: 14px;
-            margin-bottom: 13px;
-        }
-
-        .balance {
-            font-size: clamp(30px, 5vw, 43px);
-            font-weight: 800;
-            letter-spacing: -1px;
-            overflow-wrap: anywhere;
-        }
-
-        .balance-note {
-            font-size: 12px;
-            color: rgba(255,255,255,0.85);
-            margin-top: 12px;
-            line-height: 1.6;
-        }
-
-        .balance-footer {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 18px;
-            margin-top: 28px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .balance-footer span {
-            display: block;
-            color: rgba(255,255,255,0.75);
-            font-size: 11px;
-            margin-bottom: 7px;
-        }
-
-        .balance-footer strong {
-            font-size: 13px;
-        }
-
-        .section-title {
-            font-size: 19px;
-            margin-bottom: 17px;
-        }
-
-        .actions {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 16px;
-            margin-bottom: 30px;
-        }
-
-        .action-card {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-align: left;
-            padding: 20px 16px;
-            border: 1px solid var(--border);
-            border-radius: 17px;
-            background: white;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .action-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(50, 38, 100, 0.08);
-        }
-
-        .action-icon {
-            width: 44px;
-            height: 44px;
-            flex-shrink: 0;
-            display: grid;
-            place-items: center;
-            border-radius: 13px;
-            background: var(--purple-light);
-            color: var(--purple-dark);
-            font-size: 22px;
-        }
-
-        .action-card strong {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 6px;
-        }
-
-        .action-card p {
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .wallet-card,
-        .transactions {
-            padding: 25px;
-            border: 1px solid var(--border);
-            border-radius: 19px;
-            background: white;
-            margin-bottom: 25px;
-        }
-
-        .card-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .card-heading h2 {
-            font-size: 18px;
-        }
-
-        .wallet-description {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.7;
-            margin-bottom: 17px;
-        }
-
-        .address-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px;
-            background: #faf9ff;
-            border: 1px solid #e7e2f8;
-            border-radius: 12px;
-        }
-
-        .address-text {
-            flex: 1;
-            min-width: 0;
-            color: #48415f;
-            font-size: 13px;
-            overflow-wrap: anywhere;
-            line-height: 1.7;
-        }
-
-        .copy-button,
-        .dialog-close {
-            flex-shrink: 0;
-            padding: 11px 15px;
-            border: none;
-            border-radius: 9px;
-            background: var(--purple);
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .copy-button:hover,
-        .dialog-close:hover {
-            background: var(--purple-dark);
-        }
-
-        .notice {
-            margin-top: 16px;
-            padding: 14px;
-            border-radius: 11px;
-            background: #f5f2ff;
-            color: #59458f;
-            font-size: 12px;
-            line-height: 1.7;
-        }
-
-        .empty-state {
-            padding: 30px 15px;
-            text-align: center;
-            background: #faf9ff;
-            border: 1px dashed #ddd5f5;
-            border-radius: 13px;
-        }
-
-        .empty-icon {
-            font-size: 29px;
-            margin-bottom: 12px;
-        }
-
-        .empty-state h3 {
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
-
-        .empty-state p {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .transaction-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .transaction-row:last-child {
-            border-bottom: none;
-        }
-
-        .transaction-details {
-            min-width: 0;
-        }
-
-        .transaction-details strong {
-            display: block;
-            margin-bottom: 6px;
-            overflow-wrap: anywhere;
-        }
-
-        .transaction-details p {
-            font-size: 12px;
-            color: var(--muted);
-            line-height: 1.7;
-            overflow-wrap: anywhere;
-        }
-
-        .transaction-amount {
-            white-space: nowrap;
-            text-align: right;
-            font-size: 14px;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 12px 0;
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
-        .dialog-backdrop {
-            position: fixed;
-            inset: 0;
-            z-index: 10;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(28, 21, 55, 0.55);
-        }
-
-        .dialog-backdrop.open {
-            display: flex;
-        }
-
-        .dialog {
-            width: 100%;
-            max-width: 390px;
-            padding: 28px;
-            border-radius: 20px;
-            background: white;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-        }
-
-        .dialog h2 {
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .dialog p {
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .dialog-close {
-            width: 100%;
-            padding: 13px;
-            font-size: 14px;
-        }
-
-        @media (max-width: 650px) {
-            .container {
-                padding: 20px 15px 28px;
-            }
-
-            .header {
-                margin-bottom: 28px;
-            }
-
-            .brand-name {
-                font-size: 17px;
-            }
-
-            .brand-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .balance-card {
-                padding: 25px 21px;
-            }
-
-            .actions {
-                grid-template-columns: 1fr;
-                gap: 11px;
-            }
-
-            .action-card {
-                padding: 15px;
-            }
-
-            .wallet-card,
-            .transactions {
-                padding: 19px 15px;
-            }
-
-            .address-box {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .copy-button {
-                width: 100%;
-                padding: 13px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .container {
-                padding-right: 11px;
-                padding-left: 11px;
-            }
-
-            .balance-card {
-                padding: 22px 16px;
-            }
-
-            .balance {
-                font-size: 28px;
-            }
-        }
-    </style>
 </head>
 
+
+
 <body>
+
     <main class="container">
 
+
+
         <header class="header">
+
             <div class="brand">
+
                 <div class="brand-icon">A</div>
+
                 <div>
+
                     <div class="brand-name">Aurevia Capital</div>
+
                     <div class="brand-subtitle">Your financial overview</div>
+
                 </div>
+
             </div>
+
             <div class="avatar" aria-label="Aurevia Capital account">AC</div>
+
         </header>
 
+
+
         <section class="page-heading">
+
             <h1>My Wallet</h1>
+
             <p>Manage your wallet and view your account activity.</p>
+
         </section>
+
+
 
         <section class="balance-card">
+
             <div class="balance-content">
-                <div class="balance-label">Recorded Balance</div>
+
+                <div class="balance-label">Available Balance</div>
+
                 <div class="balance" id="walletBalance">Loading...</div>
 
+
+
                 <p class="balance-note">
-                    This is your balance 
+
+                    your current avalable balance&#x20;
+
                 </p>
 
+
+
                 <div class="balance-footer">
+
                     <div>
+
                         <span>Account</span>
+
                         <strong>Aurevia Capital</strong>
+
                     </div>
+
                     <div>
+
                         <span>Wallet status</span>
+
                         <strong id="walletStatus">Checking...</strong>
+
                     </div>
+
                 </div>
+
+            </div>
+
+        </section>
+
+
+
+
+
+        <!-- Aurevia Capital Investment Plans -->
+        <section class="investment-section" id="investment-plans">
+            <h2 class="section-title">Investment Plans</h2>
+            <p class="investment-intro">
+                Compare all Aurevia Capital plans in one place, including the minimum investment, term and stated return.
+            </p>
+            <div class="plans-table-wrap">
+                <table class="plans-table">
+                    <thead><tr><th>Plan</th><th>Minimum investment</th><th>Term</th><th>Stated return per period</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Aurevia Starter</strong></td><td>$1,000</td><td>7 days</td><td>25%</td></tr>
+                        <tr><td><strong>Aurevia Growth</strong></td><td>$2,500</td><td>10 days</td><td>10%</td></tr>
+                        <tr><td><strong>Aurevia Select</strong></td><td>$5,000</td><td>15 days</td><td>10%</td></tr>
+                        <tr><td><strong>Aurevia Premium</strong></td><td>$10,000</td><td>25 days</td><td>10%</td></tr>
+                        <tr><td><strong>Aurevia Elite</strong></td><td>$25,000</td><td>35 days</td><td>5%</td></tr>
+                        <tr><td><strong>Aurevia Executive</strong></td><td>$50,000</td><td>45 days</td><td>5%</td></tr>
+                        <tr><td><strong>Aurevia Signature</strong></td><td>$100,000</td><td>60 days</td><td>10%</td></tr>
+                        <tr><td><strong>Aurevia Platinum</strong></td><td>$250,000</td><td>80 days</td><td>10%</td></tr>
+                        <tr><td><strong>Aurevia Private</strong></td><td>$500,000</td><td>100 days</td><td>10%</td></tr>
+                        <tr><td><strong>Aurevia Institutional</strong></td><td>$1,000,000</td><td>Customized</td><td>Individually agreed</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="investment-note">
+                Investment terms and projected returns are subject to the applicable written agreement.
+                Returns are not guaranteed; actual investment performance may differ.
             </div>
         </section>
+        <!-- End Aurevia Capital Investment Plans -->
+
 
         <section>
+
             <h2 class="section-title">Quick Actions</h2>
 
+
+
             <div class="actions">
+
                 <button class="action-card" type="button"
-                    onclick="showMessage('Send Funds', 'Sending is unavailable until a verified wallet and transfer service are connected.')">
+
+                    onclick="showMessage('Send Funds', 'Sending is unavailable until funds is added.')">
+
                     <div class="action-icon">↗</div>
+
                     <div>
+
                         <strong>Send Funds</strong>
+
                         <p>Send funds from your wallet</p>
+
                     </div>
+
                 </button>
 
+
+
                 <button class="action-card" type="button"
-                    onclick="showMessage('Add Funds', 'Deposits are unavailable until a verified wallet and payment service are connected.')">
+
+                    onclick="showAddFunds()">
+
                     <div class="action-icon">＋</div>
+
                     <div>
+
                         <strong>Add Funds</strong>
+
                         <p>Add funds to your wallet</p>
+
                     </div>
+
                 </button>
 
+
+
                 <button class="action-card" type="button"
-                    onclick="showMessage('Withdraw Funds', 'Withdrawals are unavailable until a verified wallet and payment service are connected.')">
+
+                    onclick="showMessage('Withdraw Funds', 'Withdrawals are unavailable until funds is added.')">
+
                     <div class="action-icon">⇧</div>
+
                     <div>
+
                         <strong>Withdraw</strong>
+
                         <p>Withdraw from your wallet</p>
+
                     </div>
+
                 </button>
+
             </div>
+
         </section>
+
+
 
         <section class="wallet-card">
+
             <div class="card-heading">
+
                 <h2>My Wallet Address</h2>
+
             </div>
+
+
 
             <p class="wallet-description">
-                Your wallet address will appear here after a valid address
-                has been added and verified.
+
+                Use this Bitcoin (BTC) address for deposits. Check the network and address carefully before sending.
+
             </p>
 
+
+
             <div class="address-box">
-                <span class="address-text" id="walletAddress">
-                    Wallet address pending setup
-                </span>
+
+                <span class="address-text" id="walletAddress">bc1qt7tzm33vxjgq3nyqrwg4xwgqh5l9waujf6qfcf</span>
+
+
 
                 <button class="copy-button" type="button"
+
                     onclick="copyWallet()">
+
                     Copy Address
+
                 </button>
+
             </div>
+
+
 
             <div class="notice">
-                A verified wallet address and the correct network are
-                required before cryptocurrency can be received.
+
+                Important: Send Bitcoin (BTC) on the Bitcoin network only. Sending other coins or using another network may result in permanent loss.
+
             </div>
+
         </section>
+
+
 
         <section class="transactions">
+
             <div class="card-heading">
+
                 <h2>Recent Activity</h2>
+
             </div>
+
+
 
             <div id="transactionList" aria-live="polite">
+
                 <div class="empty-state">
+
                     <h3>Loading transactions...</h3>
+
                     <p>Please wait while your account activity loads.</p>
+
                 </div>
+
             </div>
+
         </section>
 
+
+
         <footer class="footer">
-            <p>&copy; 2026 Aurevia Capital</p>
-            <p>My Wallet</p>
+
+            <p>&copy; 2006 Aurevia Capital</p>
+
+            <p></p>
+
         </footer>
+
+
 
     </main>
 
+
+
     <div class="dialog-backdrop" id="messageDialog"
+
         role="dialog" aria-modal="true" aria-labelledby="dialogTitle"
+
         onclick="closeDialog(event)">
 
+
+
         <div class="dialog">
+
             <h2 id="dialogTitle">Information</h2>
+
             <p id="dialogMessage"></p>
+            <div class="dialog-address-box" id="dialogAddressBox" hidden>
+                <span id="dialogAddressText">bc1qt7tzm33vxjgq3nyqrwg4xwgqh5l9waujf6qfcf</span>
+                <button class="copy-button" type="button" onclick="copyWallet()">Copy Bitcoin Address</button>
+            </div>
+
             <button class="dialog-close" type="button"
+
                 onclick="closeDialog()">
+
                 Close
+
             </button>
+
         </div>
+
     </div>
 
+
+
     <script type="module">
+
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 
+
+
         import {
+
             getAuth,
+
             onAuthStateChanged
+
         } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
+
+
         import {
+
             getFirestore,
+
             collection,
+
             getDocs
+
         } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
+
+
         const firebaseConfig = {
+
             apiKey: "AIzaSyAPCjVtvp7QiXqPVJDF6Ynw8kq6SMEUcHQ",
+
             authDomain: "investment-5c3f8.firebaseapp.com",
+
             projectId: "investment-5c3f8",
+
             storageBucket: "investment-5c3f8.firebasestorage.app",
+
             messagingSenderId: "420795229421",
+
             appId: "1:420795229421:web:904b481b1a896307da58e4",
+
             measurementId: "G-E3FB79ZK4Y"
+
         };
 
+
+
         const app = initializeApp(firebaseConfig);
+
         const auth = getAuth(app);
+
         const db = getFirestore(app);
 
+
+
         const transactionList = document.getElementById("transactionList");
+
         const balanceElement = document.getElementById("walletBalance");
+
         const walletStatus = document.getElementById("walletStatus");
+
+
+
+        const BTC_WALLET_ADDRESS = "bc1qt7tzm33vxjgq3nyqrwg4xwgqh5l9waujf6qfcf";
 
         function showMessage(title, message) {
             document.getElementById("dialogTitle").textContent = title;
             document.getElementById("dialogMessage").textContent = message;
+            document.getElementById("dialogAddressBox").hidden = true;
             document.getElementById("messageDialog").classList.add("open");
         }
 
-        function closeDialog(event) {
-            const backdrop = document.getElementById("messageDialog");
-
-            if (event && event.target !== backdrop) {
-                return;
-            }
-
-            backdrop.classList.remove("open");
+        function showAddFunds() {
+            document.getElementById("dialogTitle").textContent = "Add Funds with Bitcoin";
+            document.getElementById("dialogMessage").textContent = "Send Bitcoin (BTC) to the address below. Confirm the address and Bitcoin network before sending. Deposits may take time to confirm.";
+            document.getElementById("dialogAddressText").textContent = BTC_WALLET_ADDRESS;
+            document.getElementById("dialogAddressBox").hidden = false;
+            document.getElementById("messageDialog").classList.add("open");
         }
 
-        function copyWallet() {
-            showMessage(
-                "Wallet Address Pending",
-                "A verified wallet address has not been added yet, so there is no address to copy."
-            );
+
+
+        function closeDialog(event) {
+
+            const backdrop = document.getElementById("messageDialog");
+
+
+
+            if (event && event.target !== backdrop) {
+
+                return;
+
+            }
+
+
+
+            backdrop.classList.remove("open");
+
+        }
+
+
+
+        async function copyWallet() {
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(BTC_WALLET_ADDRESS);
+                } else {
+                    const temporaryInput = document.createElement("textarea");
+                    temporaryInput.value = BTC_WALLET_ADDRESS;
+                    temporaryInput.setAttribute("readonly", "");
+                    temporaryInput.style.position = "fixed";
+                    temporaryInput.style.opacity = "0";
+                    document.body.appendChild(temporaryInput);
+                    temporaryInput.select();
+                    const copied = document.execCommand("copy");
+                    temporaryInput.remove();
+                    if (!copied) throw new Error("Copy command failed");
+                }
+                showMessage("Address Copied", "The Bitcoin wallet address has been copied. Please double-check it before sending funds.");
+            } catch (error) {
+                showMessage("Copy Address", "Please select and copy this address manually: " + BTC_WALLET_ADDRESS);
+            }
         }
 
         window.showMessage = showMessage;
+        window.showAddFunds = showAddFunds;
         window.closeDialog = closeDialog;
         window.copyWallet = copyWallet;
 
+
+
         document.addEventListener("keydown", function(event) {
+
             if (event.key === "Escape") {
+
                 document.getElementById("messageDialog").classList.remove("open");
+
             }
+
         });
 
+
+
         function escapeHTML(value) {
+
             return String(value ?? "").replace(/[&<>"']/g, character => ({
+
                 "&": "&amp;",
+
                 "<": "&lt;",
+
                 ">": "&gt;",
+
                 '"': "&quot;",
+
                 "'": "&#39;"
+
             })[character]);
+
         }
+
+
 
         function formatMoney(amount) {
+
             return new Intl.NumberFormat("en-US", {
+
                 style: "currency",
+
                 currency: "USD"
+
             }).format(amount);
+
         }
+
+
 
         function getDate(transaction) {
+
             if (transaction.createdAt?.toDate) {
+
                 return transaction.createdAt.toDate().toLocaleString();
+
             }
+
+
 
             if (transaction.createdAt) {
+
                 return String(transaction.createdAt);
+
             }
 
+
+
             return "Date not provided";
+
         }
 
+
+
         async function loadTransactions(user) {
+
             transactionList.innerHTML = "<p>Loading transactions...</p>";
 
+
+
             try {
+
                 // Read only this signed-in customer's transaction records.
+
                 const transactionRef = collection(
+
                     db,
+
                     "users",
+
                     user.uid,
+
                     "transactions"
+
                 );
+
+
 
                 const snapshot = await getDocs(transactionRef);
 
+
+
                 console.log("Signed-in customer UID:", user.uid);
+
                 console.log("Transactions found:", snapshot.size);
 
+
+
                 if (snapshot.empty) {
+
                     transactionList.innerHTML = `
+
                         <div class="empty-state">
+
                             <div class="empty-icon">↻</div>
+
                             <h3>No transactions yet</h3>
+
                             <p>Your recorded transaction history will appear here when transactions are available.</p>
+
                         </div>
+
                     `;
 
+
+
                     balanceElement.textContent = formatMoney(0);
+
                     return;
+
                 }
 
+
+
                 const transactions = snapshot.docs.map(doc => ({
+
                     id: doc.id,
+
                     ...doc.data()
+
                 }));
 
+
+
                 transactions.sort((a, b) => {
+
                     const timeA = a.createdAt?.toMillis?.() ?? 0;
+
                     const timeB = b.createdAt?.toMillis?.() ?? 0;
+
                     return timeB - timeA;
+
                 });
+
+
 
                 let recordedBalance = 0;
 
+
+
                 transactions.forEach(transaction => {
+
                     const amount = Number(transaction.amount);
+
                     const type = String(transaction.type ?? "").toLowerCase();
+
                     const status = String(transaction.status ?? "").toLowerCase();
 
+
+
                     if (!Number.isFinite(amount) || status !== "completed") {
+
                         return;
+
                     }
 
+
+
                     if (["deposit", "credit", "profit"].includes(type)) {
+
                         recordedBalance += amount;
+
                     } else if (
+
                         ["withdrawal", "withdraw", "debit"].includes(type)
+
                     ) {
+
                         recordedBalance -= amount;
+
                     }
+
                 });
+
+
 
                 balanceElement.textContent = formatMoney(recordedBalance);
 
+
+
                 transactionList.innerHTML = transactions.map(transaction => {
+
                     const amount = Number(transaction.amount);
+
                     const validAmount = Number.isFinite(amount);
+
                     const status = String(transaction.status ?? "pending");
+
                     const type = String(transaction.type ?? "transaction");
 
+
+
                     const isOutgoing = [
+
                         "withdrawal",
+
                         "withdraw",
+
                         "debit"
+
                     ].includes(type.toLowerCase());
 
+
+
                     const amountText = validAmount
+
                         ? `${isOutgoing ? "−" : ""}${formatMoney(amount)}`
+
                         : "Amount unavailable";
 
+
+
                     return `
+
                         <div class="transaction-row">
+
                             <div class="transaction-details">
+
                                 <strong>${escapeHTML(type)}</strong>
+
                                 <p>${escapeHTML(transaction.description || "Transaction")}</p>
+
                                 <p>${escapeHTML(getDate(transaction))}</p>
+
                                 <p>Status: ${escapeHTML(status)}</p>
+
                             </div>
+
                             <strong class="transaction-amount">
+
                                 ${escapeHTML(amountText)}
+
                             </strong>
+
                         </div>
+
                     `;
+
                 }).join("");
 
+
+
             } catch (error) {
+
                 console.error("Could not load transactions:", error);
 
+
+
                 transactionList.innerHTML = `
+
                     <div class="empty-state">
+
                         <h3>Unable to load transactions</h3>
+
                         <p>Your account activity could not be loaded. Please try again later.</p>
+
                     </div>
+
                 `;
+
             }
+
         }
 
+
+
         onAuthStateChanged(auth, user => {
+
             if (!user) {
+
                 walletStatus.textContent = "Not signed in";
+
                 balanceElement.textContent = "—";
 
+
+
                 transactionList.innerHTML = `
+
                     <div class="empty-state">
+
                         <h3>Please sign in</h3>
+
                         <p>Sign in to your account to view your transaction history.</p>
+
                     </div>
+
                 `;
 
+
+
                 return;
+
             }
 
+
+
             walletStatus.textContent = "Signed in";
+
             console.log("Wallet signed-in UID:", user.uid);
 
+
+
             loadTransactions(user);
+
         });
+
     </script>
+
 </body>
+
 </html>
